@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  virtuoso:
+    restart: always
+    image: docker.io/openlink/virtuoso-opensource-7:latest
+    environment:
+      # Pass through passwords from .env file
+      - DAV_PASSWORD=${DAV_PASSWORD}
+      - DBA_PASSWORD=${DBA_PASSWORD}
+
+      # Also allow /data dir
+      - VIRT_PARAMETERS_DIRSALLOWED=., ../vad, /usr/share/proj, /data
+      # Use settings from .env or default values
+      - VIRT_PARAMETERS_NUMBEROFBUFFERS=${VIRT_PARAMETERS_NUMBEROFBUFFERS:-10000}
+      - VIRT_PARAMETERS_MAXDIRTYBUFFERS=${VIRT_PARAMETERS_MAXDIRTYBUFFERS:-6000}
+      # Set default query
+      - VIRT_SPARQL_DEFAULTQUERY=${VIRT_SPARQL_DEFAULTQUERY}
+    ports:
+      - 8890:8890
+    volumes:
+      # Contains the database files
+      - ./database:/database
+      # Used for loading data
+      - ./data:/data:ro
+      # Mount loading script
+      - ./load.sql:/initdb.d/load.sql:ro
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
