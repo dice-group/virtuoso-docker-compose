@@ -17,7 +17,7 @@ services:
       # Set default query
       - VIRT_SPARQL_DEFAULTQUERY=${VIRT_SPARQL_DEFAULTQUERY}
     ports:
-      - 8890:8890
+      - ${VIRTUOSO_PORT:-8890}:8890
     volumes:
       # Contains the database files
       - ./database:/database
