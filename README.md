@@ -4,6 +4,18 @@ This is a small setup to run a virtuoso instance in docker container and load a 
 It is intended to be useful for long-term as well as ad-hoc deployments of pre-existing datasets.  
 If you want to use virtuoso to compose a dataset, you can still use this setup as a starting point (there is nothing stopping you from modifying the loaded data).
 
+## Quick start
+```
+git clone https://github.com/dice-group/virtuoso-docker-compose.git
+cd virtuoso-docker-compose
+./gen-env.sh
+```
+Place dataset files into `data` directory.  
+Optionally edit `.env` to set RAM and port settings.
+```
+docker-compose up -d
+```
+
 ## Usage
 
 ### Database location
