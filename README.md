@@ -41,7 +41,13 @@ Use `docker-compose up -d` to start the container and `docker-compose down` to s
 You can also use `docker-compose up -d --pull` to update the container to a new image version (if it exists).
 
 ### Resetting the database
-If you ever need to reset the database, simply stop the container and remove the `database` directory (for example using `sudo rm -rf ./database`).
+If you ever need to reset the database, simply stop the container and remove the `database` directory.  
+For example using
+```
+sudo docker-compose down
+sudo rm -rf ./database
+sudo docker-compose up -d
+```
 
 ## License
 Copyright 2023 DICE Group
